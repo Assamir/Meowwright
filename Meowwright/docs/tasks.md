@@ -4,9 +4,9 @@ This document contains a prioritized list of tasks to improve the Meowwright tes
 
 ## Project Setup and Configuration
 
-1. [ ] Add proper project description, author, and other metadata to package.json
-2. [ ] Configure npm scripts for common operations (test, lint, report, etc.)
-3. [ ] Set up ESLint and Prettier for code quality and consistent formatting
+1. [x] Add proper project description, author, and other metadata to package.json
+2. [x] Configure npm scripts for common operations (test, lint, report, etc.)
+3. [x] Set up ESLint and Prettier for code quality and consistent formatting
 4. [ ] Configure TypeScript properly with strict type checking
 5. [ ] Implement dotenv for environment variable management (uncomment and configure in playwright.config.ts)
 6. [ ] Create a comprehensive README.md with project overview, setup instructions, and usage examples

@@ -1,0 +1,25 @@
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Test results
+test-results/
+playwright-report/
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Other
+.DS_Store
