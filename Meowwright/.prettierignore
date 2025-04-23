@@ -1,25 +1,8 @@
-# Dependency directories
 node_modules/
-
-# Build outputs
 dist/
 build/
-
-# Test results
-test-results/
+coverage/
 playwright-report/
-
-# Logs
-logs/
-*.log
-
-# IDE specific files
-.idea/
-.vscode/
-
-# Package files
+test-results/
+*.min.js
 package-lock.json
-yarn.lock
-
-# Other
-.DS_Store

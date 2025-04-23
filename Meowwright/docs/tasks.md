@@ -7,11 +7,11 @@ This document contains a prioritized list of tasks to improve the Meowwright tes
 1. [x] Add proper project description, author, and other metadata to package.json
 2. [x] Configure npm scripts for common operations (test, lint, report, etc.)
 3. [x] Set up ESLint and Prettier for code quality and consistent formatting
-4. [ ] Configure TypeScript properly with strict type checking
-5. [ ] Implement dotenv for environment variable management (uncomment and configure in playwright.config.ts)
-6. [ ] Create a comprehensive README.md with project overview, setup instructions, and usage examples
-7. [ ] Set up a CI/CD pipeline configuration (.github/workflows or similar)
-8. [ ] Expand .gitignore to cover more common exclusions (logs, environment files, etc.)
+4. [x] Configure TypeScript properly with strict type checking
+5. [x] Implement dotenv for environment variable management (uncomment and configure in playwright.config.ts)
+6. [x] Create a comprehensive README.md with project overview, setup instructions, and usage examples
+7. [x] Set up a CI/CD pipeline configuration for Google Cloud Build (cloudbuild.yaml)
+8. [x] Expand .gitignore to cover more common exclusions (logs, environment files, etc.)
 
 ## Architecture and Design
 

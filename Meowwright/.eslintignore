@@ -1,21 +1,8 @@
-# Dependency directories
 node_modules/
-
-# Build outputs
 dist/
 build/
-
-# Test results
-test-results/
+coverage/
 playwright-report/
-
-# Logs
-logs/
-*.log
-
-# IDE specific files
-.idea/
-.vscode/
-
-# Configuration files
-*.config.js
+test-results/
+*.js.map
+*.d.ts
