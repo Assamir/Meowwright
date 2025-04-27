@@ -9,6 +9,11 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
+ * Import the configuration manager
+ */
+import { config } from './config/config-manager';
+
+/**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
@@ -17,8 +22,8 @@ export default defineConfig({
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  /* Retry on CI only or use the value from config */
+  retries: process.env.CI ? 2 : config.getRetries(),
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -26,14 +31,15 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: config.getBaseUrl(),
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    headless: false,
-    viewport: { width: 1920, height: 1080 },
-    video: 'on',
-    screenshot: 'only-on-failure',
+    /* Get browser configuration from config manager */
+    trace: config.getBrowserConfig().trace || 'on-first-retry',
+    headless: config.getBrowserConfig().headless || false,
+    viewport: config.getBrowserConfig().viewport || { width: 1920, height: 1080 },
+    video: config.getBrowserConfig().video || 'on',
+    screenshot: config.getBrowserConfig().screenshot || 'only-on-failure',
+    ignoreHTTPSErrors: config.getBrowserConfig().ignoreHTTPSErrors || false,
   },
 
   /* Configure projects for major browsers */
@@ -43,15 +49,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-    //
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {

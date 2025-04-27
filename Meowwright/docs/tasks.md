@@ -15,8 +15,8 @@ This document contains a prioritized list of tasks to improve the Meowwright tes
 
 ## Architecture and Design
 
-9. [ ] Create a more robust fixture system that can handle multiple page objects
-10. [ ] Implement a centralized configuration management system for test data and environments
+9. [x] Create a more robust fixture system that can handle multiple page objects
+10. [x] Implement a centralized configuration management system for test data and environments
 11. [ ] Develop a logging strategy beyond simple console.log statements
 12. [ ] Create utility classes for common operations (string manipulation, date handling, etc.)
 13. [ ] Implement API testing capabilities alongside UI testing

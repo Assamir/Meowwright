@@ -1,0 +1,23 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "Password123!",
+    "email": "admin@example.com",
+    "firstName": "Admin",
+    "lastName": "User"
+  },
+  "standard": {
+    "username": "standard",
+    "password": "Password123!",
+    "email": "standard@example.com",
+    "firstName": "Standard",
+    "lastName": "User"
+  },
+  "restricted": {
+    "username": "restricted",
+    "password": "Password123!",
+    "email": "restricted@example.com",
+    "firstName": "Restricted",
+    "lastName": "User"
+  }
+}

@@ -9,8 +9,8 @@ Meowwright is a testing framework built on top of Playwright, designed to make U
 ## Features
 
 - Page Object Model implementation
-- Fixtures for test setup and teardown
-- Configuration for different environments
+- Robust fixture system supporting multiple page objects
+- Centralized configuration management system for test data and environments
 - CI/CD integration with Google Cloud Build
 
 ## Getting Started
@@ -54,8 +54,43 @@ npx playwright test tests/example.spec.ts
 - `pages/`: Page Object Model classes
 - `fixtures/`: Test fixtures
 - `tests/`: Test files
+- `config/`: Configuration files and manager
 - `playwright.config.ts`: Playwright configuration
 - `docs/`: Documentation
+
+## Documentation
+
+- [Configuration Management System](docs/configuration.md): How to use the centralized configuration system
+
+## Using the Fixture System
+
+Meowwright provides a robust fixture system that allows tests to use multiple page objects. The main fixture file is `fixtures/page-fixtures.ts`, which exports a `test` object with all available page objects.
+
+### Example Usage
+
+```typescript
+// Import the test object with all fixtures
+import { test } from '../../fixtures/page-fixtures';
+
+// Use multiple page objects in a test
+test('Navigate between pages', async ({ homePage, elementsPage }) => {
+    await homePage.navigate();
+    await elementsPage.navigate();
+});
+
+// Or use just the page objects you need
+test('Home page only', async ({ homePage }) => {
+    await homePage.navigate();
+});
+```
+
+### Adding New Page Objects
+
+To add a new page object to the fixture system:
+
+1. Create your page object class in the `pages/` directory
+2. Add it to the `PageFixtures` type in `fixtures/page-fixtures.ts`
+3. Add a fixture function for it in the `test.extend()` call
 
 ## CI/CD Pipeline
 

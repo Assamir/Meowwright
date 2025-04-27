@@ -1,0 +1,14 @@
+{
+  "baseUrl": "https://staging.demoqa.com",
+  "apiUrl": "https://staging.demoqa.com/api",
+  "credentials": {
+    "username": "staginguser",
+    "password": "stagingpassword"
+  },
+  "timeouts": {
+    "default": 45000,
+    "navigation": 90000,
+    "element": 15000
+  },
+  "retries": 3
+}

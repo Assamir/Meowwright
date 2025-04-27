@@ -1,0 +1,12 @@
+{
+  "name": "firefox",
+  "headless": false,
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "ignoreHTTPSErrors": true,
+  "video": "on",
+  "screenshot": "only-on-failure",
+  "trace": "on-first-retry"
+}

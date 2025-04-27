@@ -1,0 +1,14 @@
+{
+  "baseUrl": "https://www.demoqa.com",
+  "apiUrl": "https://api.demoqa.com",
+  "credentials": {
+    "username": "produser",
+    "password": "prodpassword"
+  },
+  "timeouts": {
+    "default": 60000,
+    "navigation": 120000,
+    "element": 20000
+  },
+  "retries": 1
+}

@@ -1,0 +1,14 @@
+{
+  "baseUrl": "https://demoqa.com",
+  "apiUrl": "https://demoqa.com/api",
+  "credentials": {
+    "username": "testuser",
+    "password": "testpassword"
+  },
+  "timeouts": {
+    "default": 30000,
+    "navigation": 60000,
+    "element": 10000
+  },
+  "retries": 2
+}

@@ -1,0 +1,29 @@
+{
+  "registration": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "gender": "Male",
+    "mobile": "1234567890",
+    "dateOfBirth": "15 May 1990",
+    "subjects": ["Computer Science", "Maths"],
+    "hobbies": ["Sports", "Reading"],
+    "currentAddress": "123 Main St, Anytown",
+    "state": "NCR",
+    "city": "Delhi"
+  },
+  "textBox": {
+    "fullName": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "currentAddress": "456 Oak Ave, Somewhere",
+    "permanentAddress": "789 Pine St, Elsewhere"
+  },
+  "webTables": {
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "email": "alice.johnson@example.com",
+    "age": "30",
+    "salary": "50000",
+    "department": "QA"
+  }
+}
