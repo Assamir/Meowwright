@@ -11,6 +11,8 @@ Meowwright is a testing framework built on top of Playwright, designed to make U
 - Page Object Model implementation
 - Robust fixture system supporting multiple page objects
 - Centralized configuration management system for test data and environments
+- Advanced logging strategy with Winston
+- Comprehensive utility classes for common operations
 - CI/CD integration with Google Cloud Build
 
 ## Getting Started
@@ -61,6 +63,8 @@ npx playwright test tests/example.spec.ts
 ## Documentation
 
 - [Configuration Management System](docs/configuration.md): How to use the centralized configuration system
+- [Logging Strategy](docs/logging.md): How to use the logging system
+- [Utility Classes](docs/utilities.md): How to use the utility classes for common operations
 
 ## Using the Fixture System
 

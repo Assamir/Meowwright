@@ -10,5 +10,11 @@
     "navigation": 90000,
     "element": 15000
   },
-  "retries": 3
+  "retries": 3,
+  "logging": {
+    "level": "info",
+    "enableConsole": true,
+    "enableFile": true,
+    "format": "simple"
+  }
 }

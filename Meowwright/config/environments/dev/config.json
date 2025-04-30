@@ -10,5 +10,11 @@
     "navigation": 60000,
     "element": 10000
   },
-  "retries": 2
+  "retries": 2,
+  "logging": {
+    "level": "debug",
+    "enableConsole": true,
+    "enableFile": true,
+    "format": "colorized"
+  }
 }
