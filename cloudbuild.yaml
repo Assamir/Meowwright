@@ -1,0 +1,71 @@
+# Google Cloud Build configuration for Meowwright
+# This file defines the CI/CD pipeline for running Playwright tests on Google Cloud Build
+
+steps:
+  # Check environment and package-lock.json
+  - name: 'node:18'
+    entrypoint: 'bash'
+    args: ['-c', 'pwd && ls -la && echo "Node.js version:" && node --version && echo "npm version:" && npm --version && echo "Checking for package-lock.json:" && (test -f package-lock.json && echo "package-lock.json exists" && echo "File permissions:" && ls -l package-lock.json && echo "First 10 lines of package-lock.json:" && cat package-lock.json | head -10 && echo "Checking lockfileVersion:" && grep -o "\"lockfileVersion\": [0-9]*" package-lock.json || echo "package-lock.json not found") && echo "Directory structure:" && find . -maxdepth 2 -type d | sort']
+    id: 'check-environment'
+
+  # Check npm configuration
+  - name: 'node:18'
+    entrypoint: 'bash'
+    args: ['-c', 'echo "npm configuration:" && npm config list && echo "npm cache:" && npm cache verify']
+    id: 'check-npm-config'
+    waitFor: ['check-environment']
+
+  # Try npm install as a fallback if npm ci fails
+  - name: 'node:18'
+    entrypoint: 'bash'
+    args: ['-c', 'npm ci || (echo "npm ci failed, trying npm install instead" && npm install)']
+    id: 'install-dependencies'
+    waitFor: ['check-npm-config']
+
+  # Install Playwright browsers
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['exec', 'playwright', 'install', '--with-deps', 'chromium']
+    id: 'install-browsers'
+    waitFor: ['install-dependencies']
+
+  # Run Playwright tests
+  - name: 'node:18'
+    entrypoint: 'npm'
+    args: ['exec', 'playwright', 'test', 'tests/demoqa/multi-page.spec.ts', '--project=chromium']
+    env:
+      - 'CI=true'
+      - 'TEST_ENV=dev'
+      - 'BROWSER=chromium'
+    id: 'run-tests'
+    waitFor: ['install-browsers']
+
+  # Upload test reports to Cloud Storage (optional)
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'cp', '-r', 'playwright-report', 'gs://${_BUCKET_NAME}/reports/$BUILD_ID/']
+    id: 'upload-reports'
+    waitFor: ['run-tests']
+
+  # Upload test artifacts to Cloud Storage (optional)
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'cp', '-r', 'test-results', 'gs://${_BUCKET_NAME}/artifacts/$BUILD_ID/']
+    id: 'upload-artifacts'
+    waitFor: ['run-tests']
+
+# Define timeout for the entire build
+timeout: '30m'
+
+# Define substitution variables
+substitutions:
+  _BUCKET_NAME: 'meowwright-test-results' # Replace with your actual bucket name
+
+# Define artifacts to be stored
+artifacts:
+  objects:
+    location: 'gs://${_BUCKET_NAME}/$BUILD_ID/'
+    paths: ['playwright-report/**', 'test-results/**']
+
+# Define options
+options:
+  machineType: 'E2_HIGHCPU_8' # Use a machine with 8 vCPUs for faster test execution
+  logging: CLOUD_LOGGING_ONLY
