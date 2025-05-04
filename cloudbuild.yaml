@@ -3,18 +3,21 @@
 
 steps:
   # Install Node.js dependencies
-  - name: 'gcr.io/cloud-builders/npm'
+  - name: 'node:18'
+    entrypoint: 'npm'
     args: ['ci']
     id: 'install-dependencies'
 
   # Install Playwright browsers
-  - name: 'gcr.io/cloud-builders/npm'
+  - name: 'node:18'
+    entrypoint: 'npm'
     args: ['exec', 'playwright', 'install', '--with-deps', 'chromium']
     id: 'install-browsers'
     waitFor: ['install-dependencies']
 
   # Run Playwright tests
-  - name: 'gcr.io/cloud-builders/npm'
+  - name: 'node:18'
+    entrypoint: 'npm'
     args: ['exec', 'playwright', 'test']
     env:
       - 'CI=true'
