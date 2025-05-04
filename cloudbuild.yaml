@@ -5,7 +5,7 @@ steps:
   # Check environment and package-lock.json
   - name: 'node:18'
     entrypoint: 'bash'
-    args: ['-c', 'pwd && ls -la && echo "Node.js version:" && node --version && echo "npm version:" && npm --version && echo "Checking for package-lock.json:" && test -f package-lock.json && echo "package-lock.json exists" && echo "File permissions:" && ls -l package-lock.json && echo "First 10 lines of package-lock.json:" && cat package-lock.json | head -10 && echo "Checking lockfileVersion:" && grep -o "\"lockfileVersion\": [0-9]*" package-lock.json && echo "Directory structure:" && find . -maxdepth 2 -type d | sort']
+    args: ['-c', 'pwd && ls -la && echo "Node.js version:" && node --version && echo "npm version:" && npm --version && echo "Checking for package-lock.json:" && (test -f package-lock.json && echo "package-lock.json exists" && echo "File permissions:" && ls -l package-lock.json && echo "First 10 lines of package-lock.json:" && cat package-lock.json | head -10 && echo "Checking lockfileVersion:" && grep -o "\"lockfileVersion\": [0-9]*" package-lock.json || echo "package-lock.json not found") && echo "Directory structure:" && find . -maxdepth 2 -type d | sort']
     id: 'check-environment'
 
   # Check npm configuration
