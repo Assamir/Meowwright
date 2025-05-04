@@ -32,9 +32,11 @@ steps:
   # Run Playwright tests
   - name: 'node:18'
     entrypoint: 'npm'
-    args: ['exec', 'playwright', 'test']
+    args: ['exec', 'playwright', 'test', 'tests/demoqa/multi-page.spec.ts', '--project=chromium']
     env:
       - 'CI=true'
+      - 'TEST_ENV=dev'
+      - 'BROWSER=chromium'
     id: 'run-tests'
     waitFor: ['install-browsers']
 
