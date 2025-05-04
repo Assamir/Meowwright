@@ -37,7 +37,7 @@ Update the `_BUCKET_NAME` substitution variable in the `cloudbuild.yaml` file to
 
 ```yaml
 substitutions:
-  _BUCKET_NAME: 'your-bucket-name-here'
+  _BUCKET_NAME: 'meowwright-test-results'
 ```
 
 ### 3. Connect Your Repository to Cloud Build
