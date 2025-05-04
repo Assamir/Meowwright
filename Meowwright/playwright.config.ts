@@ -9,9 +9,10 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
- * Import the configuration manager
+ * Import the configuration manager and reporting utilities
  */
 import { config } from './config/config-manager';
+import { getAllReporters } from './utils/reporting';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -27,7 +28,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['html', { outputFolder: config.getReportingConfig().outputDir || 'playwright-report' }],
+    ['junit', { outputFile: `${config.getReportingConfig().outputDir || 'playwright-report'}/junit-results.xml` }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */

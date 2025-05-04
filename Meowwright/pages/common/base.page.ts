@@ -1,6 +1,10 @@
 import {Page} from '@playwright/test';
 import logger from '../../utils/logger';
 
+/**
+ * Base page class that provides common functionality for all page objects.
+ * All page classes should extend this class to inherit common page interaction methods.
+ */
 export class BasePage {
     constructor(public page: Page) {
     }

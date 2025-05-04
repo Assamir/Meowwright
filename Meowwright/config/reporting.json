@@ -1,0 +1,13 @@
+{
+  "outputDir": "playwright-report",
+  "includeScreenshots": true,
+  "includeVideos": true,
+  "includeTestSteps": true,
+  "includeConsoleLogs": true,
+  "includeNetworkData": false,
+  "html": true,
+  "json": true,
+  "junit": false,
+  "allure": false,
+  "reportName": "Meowwright Test Report"
+}

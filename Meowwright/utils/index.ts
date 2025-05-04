@@ -10,6 +10,7 @@ export * from './object.utils';
 export * from './url.utils';
 export * from './validation.utils';
 export * from './logger';
+export * from './reporting';
 
 // For backward compatibility
 import logger from './logger';

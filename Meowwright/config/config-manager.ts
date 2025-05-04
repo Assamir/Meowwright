@@ -8,6 +8,7 @@ export class ConfigManager {
   private static instance: ConfigManager;
   private environmentConfig: any;
   private browserConfig: any;
+  private reportingConfig: any;
   private testData: Map<string, any> = new Map();
   private environment: string;
   private browser: string;
@@ -22,6 +23,7 @@ export class ConfigManager {
     this.browser = browser;
     this.loadEnvironmentConfig();
     this.loadBrowserConfig();
+    this.loadReportingConfig();
   }
 
   /**
@@ -65,6 +67,38 @@ export class ConfigManager {
     } catch (error) {
       console.error(`Error loading browser config: ${error}`);
       this.browserConfig = {};
+    }
+  }
+
+  /**
+   * Load reporting configuration
+   */
+  private loadReportingConfig(): void {
+    const configPath = path.resolve(__dirname, 'reporting.json');
+    try {
+      if (fs.existsSync(configPath)) {
+        this.reportingConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+        console.log('Loaded reporting config');
+      } else {
+        // Use default configuration if file doesn't exist
+        this.reportingConfig = {
+          outputDir: path.resolve(process.cwd(), 'playwright-report'),
+          includeScreenshots: true,
+          includeVideos: true,
+          includeTestSteps: true,
+          includeConsoleLogs: true,
+          includeNetworkData: false,
+          html: true,
+          json: true,
+          junit: false,
+          allure: false,
+          reportName: 'Meowwright Test Report'
+        };
+        console.log('Using default reporting config');
+      }
+    } catch (error) {
+      console.error(`Error loading reporting config: ${error}`);
+      this.reportingConfig = {};
     }
   }
 
@@ -173,7 +207,15 @@ export class ConfigManager {
   }
 
   /**
-   * Get the full configuration (environment + browser)
+   * Get reporting configuration
+   * @returns The reporting configuration
+   */
+  public getReportingConfig(): any {
+    return this.reportingConfig || {};
+  }
+
+  /**
+   * Get the full configuration (environment + browser + reporting)
    * @returns The full configuration
    */
   public getFullConfig(): any {
@@ -181,7 +223,8 @@ export class ConfigManager {
       environment: this.environment,
       browser: this.browser,
       environmentConfig: this.environmentConfig,
-      browserConfig: this.browserConfig
+      browserConfig: this.browserConfig,
+      reportingConfig: this.reportingConfig
     };
   }
 }

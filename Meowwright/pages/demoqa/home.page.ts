@@ -1,19 +1,40 @@
 import {Page} from '@playwright/test';
 import {BasePage} from '../common/base.page';
+import {CardComponent} from '../../components';
 
+/**
+ * Page object representing the DemoQA home page.
+ * Provides methods to interact with the main category cards on the home page.
+ */
 export class HomePage extends BasePage {
-    // Selectors for main category cards
-    readonly elementsCard = 'div.card:has-text("Elements")';
-    readonly formsCard = 'div.card:has-text("Forms")';
-    readonly alertsFrameWindowsCard = 'div.card:has-text("Alerts, Frame & Windows")';
-    readonly widgetsCard = 'div.card:has-text("Widgets")';
-    readonly interactionsCard = 'div.card:has-text("Interactions")';
-    readonly bookStoreCard = 'div.card:has-text("Book Store Application")';
+    // Card components for each category
+    readonly elementsCard: CardComponent;
+    readonly formsCard: CardComponent;
+    readonly alertsFrameWindowsCard: CardComponent;
+    readonly widgetsCard: CardComponent;
+    readonly interactionsCard: CardComponent;
+    readonly bookStoreCard: CardComponent;
 
+    /**
+     * Creates a new HomePage instance.
+     * @param page The Playwright Page instance
+     */
     constructor(public page: Page) {
         super(page);
+
+        // Initialize card components
+        this.elementsCard = new CardComponent(page, 'div.card:has-text("Elements")', 'Elements');
+        this.formsCard = new CardComponent(page, 'div.card:has-text("Forms")', 'Forms');
+        this.alertsFrameWindowsCard = new CardComponent(page, 'div.card:has-text("Alerts, Frame & Windows")', 'Alerts, Frame & Windows');
+        this.widgetsCard = new CardComponent(page, 'div.card:has-text("Widgets")', 'Widgets');
+        this.interactionsCard = new CardComponent(page, 'div.card:has-text("Interactions")', 'Interactions');
+        this.bookStoreCard = new CardComponent(page, 'div.card:has-text("Book Store Application")', 'Book Store Application');
     }
 
+    /**
+     * Navigates to the DemoQA home page.
+     * @returns Promise that resolves when navigation is complete
+     */
     async navigate(): Promise<void> {
         await this.navigateTo('https://demoqa.com/', 'DEMOQA');
     }
@@ -22,41 +43,41 @@ export class HomePage extends BasePage {
      * Clicks on the Elements card
      */
     async clickElementsCard(): Promise<void> {
-        await this.page.click(this.elementsCard);
+        await this.elementsCard.click();
     }
 
     /**
      * Clicks on the Forms card
      */
     async clickFormsCard(): Promise<void> {
-        await this.page.click(this.formsCard);
+        await this.formsCard.click();
     }
 
     /**
      * Clicks on the Alerts, Frame & Windows card
      */
     async clickAlertsFrameWindowsCard(): Promise<void> {
-        await this.page.click(this.alertsFrameWindowsCard);
+        await this.alertsFrameWindowsCard.click();
     }
 
     /**
      * Clicks on the Widgets card
      */
     async clickWidgetsCard(): Promise<void> {
-        await this.page.click(this.widgetsCard);
+        await this.widgetsCard.click();
     }
 
     /**
      * Clicks on the Interactions card
      */
     async clickInteractionsCard(): Promise<void> {
-        await this.page.click(this.interactionsCard);
+        await this.interactionsCard.click();
     }
 
     /**
      * Clicks on the Book Store Application card
      */
     async clickBookStoreCard(): Promise<void> {
-        await this.page.click(this.bookStoreCard);
+        await this.bookStoreCard.click();
     }
 }
