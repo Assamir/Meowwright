@@ -2,11 +2,25 @@
 # This file defines the CI/CD pipeline for running Playwright tests on Google Cloud Build
 
 steps:
-  # Install Node.js dependencies
+  # Check environment and package-lock.json
   - name: 'node:18'
-    entrypoint: 'npm'
-    args: ['ci']
+    entrypoint: 'bash'
+    args: ['-c', 'pwd && ls -la && echo "Node.js version:" && node --version && echo "npm version:" && npm --version && echo "Checking for package-lock.json:" && test -f package-lock.json && echo "package-lock.json exists" && echo "File permissions:" && ls -l package-lock.json && echo "First 10 lines of package-lock.json:" && cat package-lock.json | head -10 && echo "Checking lockfileVersion:" && grep -o "\"lockfileVersion\": [0-9]*" package-lock.json && echo "Directory structure:" && find . -maxdepth 2 -type d | sort']
+    id: 'check-environment'
+
+  # Check npm configuration
+  - name: 'node:18'
+    entrypoint: 'bash'
+    args: ['-c', 'echo "npm configuration:" && npm config list && echo "npm cache:" && npm cache verify']
+    id: 'check-npm-config'
+    waitFor: ['check-environment']
+
+  # Try npm install as a fallback if npm ci fails
+  - name: 'node:18'
+    entrypoint: 'bash'
+    args: ['-c', 'npm ci || (echo "npm ci failed, trying npm install instead" && npm install)']
     id: 'install-dependencies'
+    waitFor: ['check-npm-config']
 
   # Install Playwright browsers
   - name: 'node:18'
