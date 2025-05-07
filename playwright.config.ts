@@ -14,6 +14,20 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 import { config } from './config/config-manager';
 
 /**
+ * Import IP utilities for location detection
+ * 
+ * NOTE: The configuration below has been enhanced to ensure the website detects a UK location.
+ * This includes:
+ * 1. Setting UK geolocation (locale and coordinates)
+ * 2. Adding comprehensive HTTP headers that indicate UK location
+ * 3. Using a user agent string that indicates a UK browser
+ * 4. Adding comments about proxy configuration for more reliable location detection
+ * 
+ * These changes address the issue where the website checks network for location determination.
+ */
+import { isUkIpAddress, getUkGeolocationSettings, getDefaultGeolocationSettings } from './utils/ip.utils';
+
+/**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
@@ -33,6 +47,37 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: config.getBaseUrl(),
 
+    /* Set location to UK by default */
+    ...getUkGeolocationSettings(),
+
+    /* Set user agent to indicate UK browser */
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59 (UK Location)',
+
+    /* 
+     * For more reliable UK location detection, consider using a UK proxy.
+     * This would require setting up a proxy server with a UK IP address.
+     * Example configuration:
+     * proxy: {
+     *   server: 'http://uk-proxy-server:port',
+     *   username: 'username',
+     *   password: 'password'
+     * },
+     */
+
+    /* Add comprehensive HTTP headers to indicate UK location */
+    extraHTTPHeaders: {
+      'Accept-Language': 'en-GB,en;q=0.9',
+      'X-Country': 'GB',
+      'X-Forwarded-For': '51.30.154.66', // UK IP address
+      'X-Real-IP': '51.30.154.66', // UK IP address
+      'CF-IPCountry': 'GB', // Cloudflare country header
+      'X-Geo-Country': 'GB', // Common geo header
+      'X-Geo-Region': 'London', // Common geo header
+      'X-Geo-Lat': '51.5074', // London latitude
+      'X-Geo-Long': '-0.1278', // London longitude
+      'CDN-Loop': 'cloudflare', // Indicate traffic through Cloudflare (which provides geo headers)
+    },
+
     /* Get browser configuration from config manager */
     trace: config.getBrowserConfig().trace || 'on-first-retry',
     headless: config.getBrowserConfig().headless || false,
@@ -46,17 +91,62 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { 
+        ...devices['Desktop Chrome'],
+        ...getUkGeolocationSettings(),
+        extraHTTPHeaders: {
+          'Accept-Language': 'en-GB,en;q=0.9',
+          'X-Country': 'GB',
+          'X-Forwarded-For': '51.30.154.66', // UK IP address
+          'X-Real-IP': '51.30.154.66', // UK IP address
+          'CF-IPCountry': 'GB', // Cloudflare country header
+          'X-Geo-Country': 'GB', // Common geo header
+          'X-Geo-Region': 'London', // Common geo header
+          'X-Geo-Lat': '51.5074', // London latitude
+          'X-Geo-Long': '-0.1278', // London longitude
+          'CDN-Loop': 'cloudflare', // Indicate traffic through Cloudflare (which provides geo headers)
+        },
+      },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: { 
+        ...devices['Desktop Firefox'],
+        ...getUkGeolocationSettings(),
+        extraHTTPHeaders: {
+          'Accept-Language': 'en-GB,en;q=0.9',
+          'X-Country': 'GB',
+          'X-Forwarded-For': '51.30.154.66', // UK IP address
+          'X-Real-IP': '51.30.154.66', // UK IP address
+          'CF-IPCountry': 'GB', // Cloudflare country header
+          'X-Geo-Country': 'GB', // Common geo header
+          'X-Geo-Region': 'London', // Common geo header
+          'X-Geo-Lat': '51.5074', // London latitude
+          'X-Geo-Long': '-0.1278', // London longitude
+          'CDN-Loop': 'cloudflare', // Indicate traffic through Cloudflare (which provides geo headers)
+        },
+      },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: { 
+        ...devices['Desktop Safari'],
+        ...getUkGeolocationSettings(),
+        extraHTTPHeaders: {
+          'Accept-Language': 'en-GB,en;q=0.9',
+          'X-Country': 'GB',
+          'X-Forwarded-For': '51.30.154.66', // UK IP address
+          'X-Real-IP': '51.30.154.66', // UK IP address
+          'CF-IPCountry': 'GB', // Cloudflare country header
+          'X-Geo-Country': 'GB', // Common geo header
+          'X-Geo-Region': 'London', // Common geo header
+          'X-Geo-Lat': '51.5074', // London latitude
+          'X-Geo-Long': '-0.1278', // London longitude
+          'CDN-Loop': 'cloudflare', // Indicate traffic through Cloudflare (which provides geo headers)
+        },
+      },
     },
 
     /* Test against mobile viewports. */
