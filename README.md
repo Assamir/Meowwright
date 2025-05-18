@@ -14,6 +14,7 @@ Meowwright is a testing framework built on top of Playwright, designed to make U
 - Advanced logging strategy with Winston
 - Comprehensive utility classes for common operations
 - CI/CD integration with Google Cloud Build
+- Chrome (Chromium) browser support only for simplified testing
 
 ## Getting Started
 
@@ -31,13 +32,25 @@ Meowwright is a testing framework built on top of Playwright, designed to make U
 npm ci
 ```
 
-3. Install Playwright browsers:
+3. Install Playwright browsers and dependencies (only Chrome/Chromium is required):
 
 ```bash
-npx playwright install
+# Install browser dependencies
+npx playwright install-deps
+
+# Install Chromium browser
+npx playwright install chromium
 ```
 
+> **Note:** If you encounter browser launch errors related to missing dependencies, run `npx playwright install-deps` to install the required system dependencies.
+
 ### Running Tests
+
+To run only smoke tests (recommended for faster feedback):
+
+```bash
+npx playwright test --grep=@Smoke --project=chromium
+```
 
 To run all tests:
 
@@ -96,13 +109,26 @@ To add a new page object to the fixture system:
 2. Add it to the `PageFixtures` type in `fixtures/page-fixtures.ts`
 3. Add a fixture function for it in the `test.extend()` call
 
+### Tagging Tests
+
+To tag a test as a smoke test (which will be run in CI/CD):
+
+```typescript
+// Use the tag option in the test function
+test('test name', { tag: '@Smoke' }, async ({ page }) => {
+    // Test code here
+});
+```
+
+It's recommended to tag at least one test for each critical functionality to ensure good coverage in the smoke test suite.
+
 ## CI/CD Pipeline
 
 This project includes a CI/CD pipeline configuration for Google Cloud Build. The pipeline:
 
 1. Installs dependencies
-2. Installs Playwright browsers
-3. Runs tests
+2. Installs Playwright browsers (Chrome/Chromium only)
+3. Runs only smoke tests (tagged with @Smoke) for faster feedback
 4. Uploads test reports and artifacts to Google Cloud Storage
 
 For detailed setup instructions, see [CI/CD Setup](docs/ci-cd-setup.md).
