@@ -7,8 +7,8 @@ test.describe('DemoQA Elements Tests', () => {
     await elementsPage.navigate();
 
     // Verify we're on the elements page
-    expect(page.url()).toContain('elements');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/elements/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate to Text Box page', async ({ elementsPage, page }) => {
@@ -19,6 +19,6 @@ test.describe('DemoQA Elements Tests', () => {
     await elementsPage.clickTextBoxMenuItem();
 
     // Verify we're on the text box page
-    expect(page.url()).toContain('text-box');
+    await expect(page).toHaveURL(/text-box/);
   });
 });

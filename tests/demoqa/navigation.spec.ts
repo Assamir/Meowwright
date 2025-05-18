@@ -61,11 +61,11 @@ formsTest('should navigate to Practice Form', { tag: '@Smoke' }, async ({ formsP
   await formsPage.navigate();
 
   // Verify we're on the forms page
-  expect(page.url()).toContain('forms');
+  await expect(page).toHaveURL(/forms/);
 
   // Click on Practice Form and verify navigation
   await formsPage.clickPracticeForm();
-  expect(page.url()).toContain('automation-practice-form');
+  await expect(page).toHaveURL(/automation-practice-form/);
 });
 
 alertsTest('should navigate to Alerts page', async ({ alertsFrameWindowsPage, page }) => {
@@ -73,11 +73,11 @@ alertsTest('should navigate to Alerts page', async ({ alertsFrameWindowsPage, pa
   await alertsFrameWindowsPage.navigate();
 
   // Verify we're on the alerts page
-  expect(page.url()).toContain('alertsWindows');
+  await expect(page).toHaveURL(/alertsWindows/);
 
   // Click on Alerts and verify navigation
   await alertsFrameWindowsPage.clickAlerts();
-  expect(page.url()).toContain('alerts');
+  await expect(page).toHaveURL(/alerts/);
 });
 
 widgetsTest('should navigate to Date Picker page', async ({ widgetsPage, page }) => {
@@ -85,11 +85,11 @@ widgetsTest('should navigate to Date Picker page', async ({ widgetsPage, page })
   await widgetsPage.navigate();
 
   // Verify we're on the widgets page
-  expect(page.url()).toContain('widgets');
+  await expect(page).toHaveURL(/widgets/);
 
   // Click on Date Picker and verify navigation
   await widgetsPage.clickDatePicker();
-  expect(page.url()).toContain('date-picker');
+  await expect(page).toHaveURL(/date-picker/);
 });
 
 interactionsTest('should navigate to Droppable page', async ({ interactionsPage, page }) => {
@@ -97,11 +97,11 @@ interactionsTest('should navigate to Droppable page', async ({ interactionsPage,
   await interactionsPage.navigate();
 
   // Verify we're on the interactions page
-  expect(page.url()).toContain('interaction');
+  await expect(page).toHaveURL(/interaction/);
 
   // Click on Droppable and verify navigation
   await interactionsPage.clickDroppable();
-  expect(page.url()).toContain('droppable');
+  await expect(page).toHaveURL(/droppable/);
 });
 
 bookStoreTest('should search for a book', async ({ bookStorePage, page }) => {
@@ -109,7 +109,7 @@ bookStoreTest('should search for a book', async ({ bookStorePage, page }) => {
   await bookStorePage.navigate();
 
   // Verify we're on the book store page
-  expect(page.url()).toContain('books');
+  await expect(page).toHaveURL(/books/);
 
   // Search for a book
   await bookStorePage.searchBook('JavaScript');
@@ -119,5 +119,5 @@ bookStoreTest('should search for a book', async ({ bookStorePage, page }) => {
 
   // Verify search results (this is a basic check, might need adjustment)
   const bookCount = await bookStorePage.getBookCount();
-  expect(bookCount).toBeGreaterThan(0);
+  await expect(bookCount).toBeGreaterThan(0);
 });

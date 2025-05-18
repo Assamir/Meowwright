@@ -7,8 +7,8 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.navigate();
 
     // Verify we're on the alerts, frame & windows page
-    expect(page.url()).toContain('alertsWindows');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/alertsWindows/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate to Browser Windows page via link', async ({ alertsFrameWindowsPage, page }) => {
@@ -19,7 +19,7 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.clickBrowserWindows();
 
     // Verify we're on the browser windows page
-    expect(page.url()).toContain('browser-windows');
+    await expect(page).toHaveURL(/browser-windows/);
   });
 
   test('should navigate to Alerts page via link', async ({ alertsFrameWindowsPage, page }) => {
@@ -30,7 +30,7 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.clickAlerts();
 
     // Verify we're on the alerts page
-    expect(page.url()).toContain('alerts');
+    await expect(page).toHaveURL(/alerts/);
   });
 
   test('should navigate to Frames page via link', async ({ alertsFrameWindowsPage, page }) => {
@@ -41,7 +41,7 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.clickFrames();
 
     // Verify we're on the frames page
-    expect(page.url()).toContain('frames');
+    await expect(page).toHaveURL(/frames/);
   });
 
   test('should navigate to Nested Frames page via link', async ({ alertsFrameWindowsPage, page }) => {
@@ -52,7 +52,7 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.clickNestedFrames();
 
     // Verify we're on the nested frames page
-    expect(page.url()).toContain('nestedframes');
+    await expect(page).toHaveURL(/nestedframes/);
   });
 
   test('should navigate to Modal Dialogs page via link', async ({ alertsFrameWindowsPage, page }) => {
@@ -63,7 +63,7 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.clickModalDialogs();
 
     // Verify we're on the modal dialogs page
-    expect(page.url()).toContain('modal-dialogs');
+    await expect(page).toHaveURL(/modal-dialogs/);
   });
 
   test('should navigate directly to Browser Windows page', async ({ alertsFrameWindowsPage, page }) => {
@@ -71,8 +71,8 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.navigateToBrowserWindows();
 
     // Verify we're on the browser windows page
-    expect(page.url()).toContain('browser-windows');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/browser-windows/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Alerts page', async ({ alertsFrameWindowsPage, page }) => {
@@ -80,8 +80,8 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.navigateToAlerts();
 
     // Verify we're on the alerts page
-    expect(page.url()).toContain('alerts');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/alerts/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Frames page', async ({ alertsFrameWindowsPage, page }) => {
@@ -89,8 +89,8 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.navigateToFrames();
 
     // Verify we're on the frames page
-    expect(page.url()).toContain('frames');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/frames/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Nested Frames page', async ({ alertsFrameWindowsPage, page }) => {
@@ -98,8 +98,8 @@ test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
     await alertsFrameWindowsPage.navigateToNestedFrames();
 
     // Verify we're on the nested frames page
-    expect(page.url()).toContain('nestedframes');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/nestedframes/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   // Test removed as it was flaky

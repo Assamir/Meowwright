@@ -7,71 +7,71 @@ test.describe('DemoQA Interactions Tests', () => {
     await interactionsPage.navigate();
 
     // Verify we're on the interactions page
-    expect(page.url()).toContain('interaction');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/interaction/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   // Tests for clicking links
   test('should navigate to Sortable page via link', async ({ interactionsPage, page }) => {
     await interactionsPage.navigate();
     await interactionsPage.clickSortable();
-    expect(page.url()).toContain('sortable');
+    await expect(page).toHaveURL(/sortable/);
   });
 
   test('should navigate to Selectable page via link', async ({ interactionsPage, page }) => {
     await interactionsPage.navigate();
     await interactionsPage.clickSelectable();
-    expect(page.url()).toContain('selectable');
+    await expect(page).toHaveURL(/selectable/);
   });
 
   test('should navigate to Resizable page via link', async ({ interactionsPage, page }) => {
     await interactionsPage.navigate();
     await interactionsPage.clickResizable();
-    expect(page.url()).toContain('resizable');
+    await expect(page).toHaveURL(/resizable/);
   });
 
   test('should navigate to Droppable page via link', async ({ interactionsPage, page }) => {
     await interactionsPage.navigate();
     await interactionsPage.clickDroppable();
-    expect(page.url()).toContain('droppable');
+    await expect(page).toHaveURL(/droppable/);
   });
 
   // Test removed as it was failing
   // test('should navigate to Draggable page via link', async ({ interactionsPage, page }) => {
   //   await interactionsPage.navigate();
   //   await interactionsPage.clickDraggable();
-  //   expect(page.url()).toContain('dragabble');
+  //   await expect(page).toHaveURL(/dragabble/);
   // });
 
   // Tests for direct navigation
   test('should navigate directly to Sortable page', async ({ interactionsPage, page }) => {
     await interactionsPage.navigateToSortable();
-    expect(page.url()).toContain('sortable');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/sortable/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Selectable page', async ({ interactionsPage, page }) => {
     await interactionsPage.navigateToSelectable();
-    expect(page.url()).toContain('selectable');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/selectable/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Resizable page', async ({ interactionsPage, page }) => {
     await interactionsPage.navigateToResizable();
-    expect(page.url()).toContain('resizable');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/resizable/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Droppable page', async ({ interactionsPage, page }) => {
     await interactionsPage.navigateToDroppable();
-    expect(page.url()).toContain('droppable');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/droppable/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   test('should navigate directly to Draggable page', async ({ interactionsPage, page }) => {
     await interactionsPage.navigateToDraggable();
-    expect(page.url()).toContain('dragabble');
-    expect(await page.title()).toContain('DEMOQA');
+    await expect(page).toHaveURL(/dragabble/);
+    await expect(page).toHaveTitle(/DEMOQA/);
   });
 
   // Test for drag and drop functionality
@@ -89,6 +89,6 @@ test.describe('DemoQA Interactions Tests', () => {
     // Verify the drop was successful (this would need to be adjusted based on the actual page behavior)
     // For example, the droppable element might change text or color after a successful drop
     const droppableText = await page.textContent('#droppable');
-    expect(droppableText).toContain('Dropped');
+    await expect(droppableText).toContain('Dropped');
   });
 });
