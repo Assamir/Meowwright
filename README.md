@@ -32,11 +32,17 @@ Meowwright is a testing framework built on top of Playwright, designed to make U
 npm ci
 ```
 
-3. Install Playwright browsers (only Chrome/Chromium is required):
+3. Install Playwright browsers and dependencies (only Chrome/Chromium is required):
 
 ```bash
+# Install browser dependencies
+npx playwright install-deps
+
+# Install Chromium browser
 npx playwright install chromium
 ```
+
+> **Note:** If you encounter browser launch errors related to missing dependencies, run `npx playwright install-deps` to install the required system dependencies.
 
 ### Running Tests
 
