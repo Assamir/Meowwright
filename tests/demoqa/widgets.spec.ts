@@ -2,10 +2,10 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/widgets-fixture';
 
 test.describe('DemoQA Widgets Tests', () => {
-  test('should navigate to Widgets page', async ({ widgetsPage, page }) => {
+  test('should navigate to Widgets page', { tag: '@Smoke' }, async ({ widgetsPage, page }) => {
     // Navigate to the widgets page
     await widgetsPage.navigate();
-    
+
     // Verify we're on the widgets page
     expect(page.url()).toContain('widgets');
     expect(await page.title()).toContain('DEMOQA');

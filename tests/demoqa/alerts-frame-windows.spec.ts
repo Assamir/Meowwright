@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/alerts-frame-windows-fixture';
 
 test.describe('DemoQA Alerts, Frame & Windows Tests', () => {
-  test('should navigate to Alerts, Frame & Windows page', async ({ alertsFrameWindowsPage, page }) => {
+  test('should navigate to Alerts, Frame & Windows page', { tag: '@Smoke' }, async ({ alertsFrameWindowsPage, page }) => {
     // Navigate to the alerts, frame & windows page
     await alertsFrameWindowsPage.navigate();
 

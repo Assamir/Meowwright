@@ -56,7 +56,7 @@ test.describe('DemoQA Navigation Tests', () => {
   // });
 });
 
-formsTest('should navigate to Practice Form', async ({ formsPage, page }) => {
+formsTest('should navigate to Practice Form', { tag: '@Smoke' }, async ({ formsPage, page }) => {
   // Navigate to the forms page
   await formsPage.navigate();
 

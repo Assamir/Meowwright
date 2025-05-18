@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/interactions-fixture';
 
 test.describe('DemoQA Interactions Tests', () => {
-  test('should navigate to Interactions page', async ({ interactionsPage, page }) => {
+  test('should navigate to Interactions page', { tag: '@Smoke' }, async ({ interactionsPage, page }) => {
     // Navigate to the interactions page
     await interactionsPage.navigate();
 

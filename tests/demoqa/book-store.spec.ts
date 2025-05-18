@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/book-store-fixture';
 
 test.describe('DemoQA Book Store Tests', () => {
-  test('should navigate to Book Store page', async ({ bookStorePage, page }) => {
+  test('should navigate to Book Store page', { tag: '@Smoke' }, async ({ bookStorePage, page }) => {
     // Navigate to the book store page
     await bookStorePage.navigate();
 

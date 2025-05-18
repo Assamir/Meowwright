@@ -36,10 +36,10 @@ steps:
     id: 'install-browsers'
     waitFor: ['install-system-deps']
 
-  # Run Playwright tests (limited to 10 tests)
+  # Run only Smoke tagged tests
   - name: 'node:18'
     entrypoint: 'npm'
-    args: ['exec', 'playwright', 'test', '--max-tests=10', '--project=chromium']
+    args: ['exec', 'playwright', 'test', '--grep=@Smoke', '--project=chromium']
     env:
       - 'CI=true'
       - 'TEST_ENV=dev'
