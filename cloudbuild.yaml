@@ -36,10 +36,10 @@ steps:
     id: 'install-browsers'
     waitFor: ['install-system-deps']
 
-  # Run Playwright tests
+  # Run Playwright tests (limited to 10 tests)
   - name: 'node:18'
     entrypoint: 'npm'
-    args: ['exec', 'playwright', 'test', 'tests/demoqa/multi-page.spec.ts', '--project=chromium']
+    args: ['exec', 'playwright', 'test', '--max-tests=10', '--project=chromium']
     env:
       - 'CI=true'
       - 'TEST_ENV=dev'

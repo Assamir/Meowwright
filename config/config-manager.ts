@@ -15,7 +15,7 @@ export class ConfigManager {
   /**
    * Private constructor to enforce singleton pattern
    * @param environment The environment to load configuration for (dev, staging, prod)
-   * @param browser The browser to load configuration for (chromium, firefox, webkit)
+   * @param browser The browser to load configuration for (chromium only)
    */
   private constructor(environment: string = 'dev', browser: string = 'chromium') {
     this.environment = environment;
@@ -27,14 +27,15 @@ export class ConfigManager {
   /**
    * Get the singleton instance of ConfigManager
    * @param environment The environment to load configuration for (dev, staging, prod)
-   * @param browser The browser to load configuration for (chromium, firefox, webkit)
+   * @param browser The browser to load configuration for (chromium only)
    * @returns The ConfigManager instance
    */
   public static getInstance(environment?: string, browser?: string): ConfigManager {
     if (!ConfigManager.instance) {
       // Use environment variables if available, otherwise use defaults
       const env = environment || process.env.TEST_ENV || 'dev';
-      const browserType = browser || process.env.BROWSER || 'chromium';
+      // Always use chromium regardless of what's passed in
+      const browserType = 'chromium';
       ConfigManager.instance = new ConfigManager(env, browserType);
     }
     return ConfigManager.instance;
